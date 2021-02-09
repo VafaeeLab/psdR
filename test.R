@@ -19,3 +19,6 @@ devtools::install()
 
 data1 <- matrix(rnorm(10), nrow=5, ncol=2)
 psdR::psd(data1)
+
+data2 <- matrix(rnorm(9), nrow=3, ncol=3)
+psdR::psd(data2)
