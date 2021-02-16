@@ -7,7 +7,7 @@
 psd(data)
 }
 \arguments{
-\item{data}{scRNA count data - cells Vs genes}
+\item{data}{scRNA count data - cells Vs genes (dim : c x g)}
 }
 \value{
 psd transformation of input data
