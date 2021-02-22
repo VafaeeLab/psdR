@@ -58,9 +58,6 @@ data <- readRDS(file = 'TabulaMuris_Heart_10X.rds')
 x <- counts(data)
 x <- x[rowSums(x) > 0, ]
 x <- t(as.matrix(x))
-
-data_csv <- read.csv('TabulaMuris_Heart_10X-RawCount.csv')
-
 compare_psd_implementation(x)
 # [1] "Using R, psd execution time : 213.227695226669"
 # [1] "Using python via reticulate, psd execution time : 192.042806386948"
