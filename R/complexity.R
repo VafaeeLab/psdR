@@ -10,13 +10,40 @@
 #' @return complexity score : higher score indicates lower complexity
 #' @export
 complexity <- function(data, class_colname){
-  # data <- readRDS(file = 'TabulaMuris_Heart_10X.rds')
-  # class_colname <- "cell_type1"
-  x <- as.matrix(counts(data))
-  classes <- colData(data)[class_colname]
+  x <- as.matrix(SingleCellExperiment::counts(data))
+  # x <- x[1:200, 1:100]
+  classes <- SingleCellExperiment::colData(data)[class_colname]
   classes <- classes[colnames(x),]
-  classes <- unique(classes)
 
-  complexity_score <- 0 #logic to be added
+  x <- x[, !is.na(classes)]
+  classes <- classes[!is.na(classes)]
+
+  uniq_classes <- unique(classes)
+
+  for (i in c(1:length(uniq_classes))) {
+    c <- uniq_classes[i]
+    if (i == 1) {
+      mean_df <- data.frame(apply(x[, classes == c], 1, mean))
+      var_df <- data.frame(apply(x[, classes == c], 1, var))
+    }
+    else {
+      mean_df <- cbind(mean_df, data.frame(apply(x[, classes == c], 1, mean)))
+      var_df <- cbind(var_df, data.frame(apply(x[, classes == c], 1, var)))
+    }
+  }
+  F <- c()
+  for ( i in c(1 : (length(uniq_classes)-1) ) ) {
+    for ( j in c((i+1) : length(uniq_classes)) ) {
+      f_num <- (mean_df[, i] - mean_df[, j]) ^ 2
+      f_den <- var_df[, i] + var_df[, j]
+      f_den[f_den == 0] = .Machine$double.eps
+      f <- f_num / f_den
+      f <- caTools::trapz(c(1:length(f)), f)
+      F <- c(F, f)
+    }
+  }
+  complexity_score = mean(F)
   return (complexity_score)
 }
+
+
