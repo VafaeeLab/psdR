@@ -1,14 +1,15 @@
 # devtools::create("~/UNSW/VafaeeLab/psdR")
 
 setwd("~/UNSW/VafaeeLab/psdR")
+devtools::document()
+devtools::install()
+
 library(SingleCellExperiment)
 library(reticulate)
 source_python('psd.py')
 
 
-# devtools::document()
-#
-# devtools::install()
+
 
 compare_psd_implementation <- function(data, show_result = FALSE){
   start <- Sys.time()
@@ -62,3 +63,15 @@ compare_psd_implementation(x)
 # [1] "Using R, psd execution time : 213.227695226669"
 # [1] "Using python via reticulate, psd execution time : 192.042806386948"
 # [1] TRUE
+
+
+##########################################
+# complexity
+
+data <- readRDS(file = 'TabulaMuris_Heart_10X.rds')
+class_colname <- "cell_type1"
+start <- Sys.time()
+f1 <- psdR::complexity(data, class_colname)
+end <- Sys.time()
+print(paste('complexity score = ', f1))
+print(paste('complexity execution time :', difftime(end, start, units = 'secs')))
