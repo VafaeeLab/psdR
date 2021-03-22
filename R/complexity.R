@@ -11,7 +11,6 @@
 #' @export
 complexity <- function(data, class_colname){
   x <- as.matrix(SingleCellExperiment::counts(data))
-  # x <- x[1:200, 1:100]
   classes <- SingleCellExperiment::colData(data)[class_colname]
   classes <- classes[colnames(x),]
 
@@ -19,17 +18,13 @@ complexity <- function(data, class_colname){
   classes <- classes[!is.na(classes)]
 
   uniq_classes <- unique(classes)
+  mean_df <- data.frame(row.names = rownames(x))
+  var_df <- data.frame(row.names = rownames(x))
 
   for (i in c(1:length(uniq_classes))) {
     c <- uniq_classes[i]
-    if (i == 1) {
-      mean_df <- data.frame(apply(x[, classes == c], 1, mean))
-      var_df <- data.frame(apply(x[, classes == c], 1, var))
-    }
-    else {
-      mean_df <- cbind(mean_df, data.frame(apply(x[, classes == c], 1, mean)))
-      var_df <- cbind(var_df, data.frame(apply(x[, classes == c], 1, var)))
-    }
+    mean_df <- cbind(mean_df, data.frame(apply(x[, classes == c], 1, mean)))
+    var_df <- cbind(var_df, data.frame(apply(x[, classes == c], 1, var)))
   }
   F <- c()
   for ( i in c(1 : (length(uniq_classes)-1) ) ) {
@@ -45,5 +40,3 @@ complexity <- function(data, class_colname){
   complexity_score = mean(F)
   return (complexity_score)
 }
-
-
