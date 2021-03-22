@@ -4,7 +4,9 @@ setwd("~/UNSW/VafaeeLab/psdR")
 devtools::document()
 devtools::install()
 
+
 library(SingleCellExperiment)
+Sys.setenv(RETICULATE_PYTHON = ".py_env/bin/python")
 library(reticulate)
 source_python('psd.py')
 
