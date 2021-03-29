@@ -15,14 +15,14 @@ source_python('psd.py')
 
 compare_psd_implementation <- function(data, show_result = FALSE){
   start <- Sys.time()
+  psd_r_data <- psdR::psd_fft_apply(data)
+  end <- Sys.time()
+  print(paste('Using R fft apply, psd execution time :', difftime(end, start, units = 'secs')))
+
+  start <- Sys.time()
   psd_r_data <- psdR::psd(data)
   end <- Sys.time()
   print(paste('Using R, psd execution time :', difftime(end, start, units = 'secs')))
-
-  start <- Sys.time()
-  psd_r_data <- psdR::psd_without_t(data)
-  end <- Sys.time()
-  print(paste('Using R sweep, psd execution time :', difftime(end, start, units = 'secs')))
 
   if (show_result) {
     print('psd output :')
@@ -30,10 +30,9 @@ compare_psd_implementation <- function(data, show_result = FALSE){
   }
 
   start <- Sys.time()
-  psd_py_data <- psd(t(data))
+  psd_py_data <- t(psd(t(data)))
   end <- Sys.time()
   print(paste('Using python via reticulate, psd execution time :', difftime(end, start, units = 'secs')))
-  psd_py_data <- t(psd_py_data)
   if (show_result) {
     print('psd output :')
     print(psd_py_data)
@@ -74,7 +73,13 @@ compare_psd_implementation(x)
 # [1] "Using python via reticulate, psd execution time : 192.281036138535"
 # [1] TRUE
 
+# [1] "Using R fft apply, psd execution time : 205.484230279922"
+# [1] "Using R, psd execution time : 219.209401130676"
 
+# [1] "Using R fft apply, psd execution time : 211.930328607559"
+# [1] "Using R, psd execution time : 212.845811367035"
+# [1] "Using python via reticulate, psd execution time : 191.988132476807"
+# [1] TRUE
 
 ##########################################
 # complexity
