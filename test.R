@@ -94,8 +94,14 @@ compare_psd_implementation(x)
 
 data <- readRDS(file = 'TabulaMuris_Heart_10X.rds')
 class_colname <- "cell_type1"
+x <- as.matrix(SingleCellExperiment::counts(data))
+classes <- SingleCellExperiment::colData(data)[class_colname]
+classes <- classes[colnames(x),]
 start <- Sys.time()
-f1 <- psdR::complexity(data, class_colname)
+f1 <- psdR::complexity(x, classes)
 end <- Sys.time()
 print(paste('complexity score = ', f1))
 print(paste('complexity execution time :', difftime(end, start, units = 'secs')))
+
+psdR::complexity(x)
+psdR::complexity(x, c())

@@ -3,16 +3,14 @@
 #' Returns a complexity score of the data, based on Fischer's Discriminant Ratio
 #' Higher score indicates lower complexity
 #'
-#' @param data scRNA data in SingleCellExperiment object,
-#'              with counts containing count data (genes Vs cells)
-#'              and class information present in one of the colData
-#' @param class_colname name of the column in colData containing class information
+#' @param data scRNA count data - genes Vs cells (dim : g x c)
+#' @param classes cell annotation i.e. the class of each of the cells in data
 #' @return complexity score : higher score indicates lower complexity
 #' @export
-complexity <- function(data, class_colname){
-  x <- as.matrix(SingleCellExperiment::counts(data))
-  classes <- SingleCellExperiment::colData(data)[class_colname]
-  classes <- classes[colnames(x),]
+complexity <- function(data, classes = NA){
+  if (is.na(classes) || length(classes) == 0){
+    return (NA)
+  }
 
   x <- x[, !is.na(classes)]
   classes <- classes[!is.na(classes)]
