@@ -43,14 +43,16 @@ compare_psd_implementation <- function(data, show_result = FALSE){
 
 data1 <- matrix(rnorm(10), nrow=2, ncol=5)
 compare_psd_implementation(data1)
-# [1] "Using R, psd execution time : 0.00162935256958008"
-# [1] "Using python via reticulate, psd execution time : 0.00282073020935059"
+# [1] "Using R fft apply, psd execution time : 0.00855898857116699"
+# [1] "Using R, psd execution time : 0.000279664993286133"
+# [1] "Using python via reticulate, psd execution time : 0.00247502326965332"
 # [1] TRUE
 
 data2 <- matrix(rnorm(9), nrow=3, ncol=3)
 compare_psd_implementation(data2)
-# [1] "Using R, psd execution time : 0.00117683410644531"
-# [1] "Using python via reticulate, psd execution time : 0.0077660083770752"
+# [1] "Using R fft apply, psd execution time : 0.00578093528747559"
+# [1] "Using R, psd execution time : 0.000316381454467773"
+# [1] "Using python via reticulate, psd execution time : 0.00202488899230957"
 # [1] TRUE
 
 data <- matrix(c(-1.2225888, 1.34042501, 0.4259692,-0.23716855,
@@ -58,8 +60,9 @@ data <- matrix(c(-1.2225888, 1.34042501, 0.4259692,-0.23716855,
                   -0.6907052, 0.06109564),
                 nrow=2, ncol=5, byrow = TRUE)
 compare_psd_implementation(data)
-# [1] "Using R, psd execution time : 0.00132465362548828"
-# [1] "Using python via reticulate, psd execution time : 0.00522065162658691"
+# [1] "Using R fft apply, psd execution time : 0.0092620849609375"
+# [1] "Using R, psd execution time : 0.00032496452331543"
+# [1] "Using python via reticulate, psd execution time : 0.00273799896240234"
 # [1] TRUE
 
 
@@ -79,6 +82,11 @@ compare_psd_implementation(x)
 # [1] "Using R fft apply, psd execution time : 211.930328607559"
 # [1] "Using R, psd execution time : 212.845811367035"
 # [1] "Using python via reticulate, psd execution time : 191.988132476807"
+# [1] TRUE
+
+# [1] "Using R fft apply, psd execution time : 205.381190061569"
+# [1] "Using R, psd execution time : 204.640120029449"
+# [1] "Using python via reticulate, psd execution time : 191.78946185112"
 # [1] TRUE
 
 ##########################################
