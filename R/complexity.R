@@ -12,17 +12,17 @@ complexity <- function(data, classes = NA){
     return (NA)
   }
 
-  x <- x[, !is.na(classes)]
+  data <- data[, !is.na(classes)]
   classes <- classes[!is.na(classes)]
 
   uniq_classes <- unique(classes)
-  mean_df <- data.frame(row.names = rownames(x))
-  var_df <- data.frame(row.names = rownames(x))
+  mean_df <- data.frame(row.names = rownames(data))
+  var_df <- data.frame(row.names = rownames(data))
 
   for (i in c(1:length(uniq_classes))) {
     c <- uniq_classes[i]
-    mean_df <- cbind(mean_df, data.frame(apply(x[, classes == c], 1, mean)))
-    var_df <- cbind(var_df, data.frame(apply(x[, classes == c], 1, var)))
+    mean_df <- cbind(mean_df, data.frame(apply(data[, classes == c], 1, mean)))
+    var_df <- cbind(var_df, data.frame(apply(data[, classes == c], 1, var)))
   }
   F <- c()
   for ( i in c(1 : (length(uniq_classes)-1) ) ) {
