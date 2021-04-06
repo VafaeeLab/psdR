@@ -8,12 +8,14 @@
 #' @return complexity score : higher score indicates lower complexity
 #' @export
 complexity <- function(data, classes = NA){
-  if (is.na(classes) || length(classes) == 0){
+  if ((is.na(classes) && (length(classes) == 1)) || length(classes) == 0){
     return (NA)
   }
 
-  data <- data[, !is.na(classes)]
-  classes <- classes[!is.na(classes)]
+  if (anyNA(classes)) {
+    data <- data[, !is.na(classes)]
+    classes <- classes[!is.na(classes)]
+  }
 
   uniq_classes <- unique(classes)
   mean_df <- data.frame(row.names = rownames(data))
