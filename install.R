@@ -1,9 +1,12 @@
+install.packages("devtools")
+install.packages("roxygen2")
+
 if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 
 BiocManager::install("SingleCellExperiment")
-
-install.packages("devtools")
-install.packages("roxygen2")
+BiocManager::install("Linnorm")
 
 install.packages("caTools")
+
+
