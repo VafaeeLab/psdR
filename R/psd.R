@@ -3,9 +3,13 @@
 #' Compute the Power Spectral Density (psd) transformation of the given scRNA count data
 #'
 #' @param data scRNA count data - genes Vs cells (dim : g x c)
+#' @param filter logical value indicating if genes with 0 count should be filtered - default = TRUE
 #' @return psd transformation of input data (dim : g x c)
 #' @export
-psd <- function(data){
+psd <- function(data, filter = TRUE){
+  if (filter) {
+    data <- data[rowSums(data) != 0, ]      #filter out genes with 0 count
+  }
   data <- t(data)                           #dim : c x g
   data.psd <- cor(data)                     #dim : g x g
   data.psd <- data %*% data.psd             #dim : c x g

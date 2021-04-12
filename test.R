@@ -14,10 +14,10 @@ source_python('psd.py')
 
 
 compare_psd_implementation <- function(data, show_result = FALSE){
-  start <- Sys.time()
-  psd_r_data <- psdR::psd_fft_apply(data)
-  end <- Sys.time()
-  print(paste('Using R fft apply, psd execution time :', difftime(end, start, units = 'secs')))
+  # start <- Sys.time()
+  # psd_r_data <- psdR::psd_fft_apply(data)
+  # end <- Sys.time()
+  # print(paste('Using R fft apply, psd execution time :', difftime(end, start, units = 'secs')))
 
   start <- Sys.time()
   psd_r_data <- psdR::psd(data)
@@ -68,7 +68,7 @@ compare_psd_implementation(data)
 
 data <- readRDS(file = 'TabulaMuris_Heart_10X.rds')
 x <- counts(data)
-x <- x[rowSums(x) > 0, ]
+x <- x[rowSums(x) != 0, ]
 x <- as.matrix(x)
 compare_psd_implementation(x)
 # [1] "Using R, psd execution time : 210.639530658722"
@@ -98,6 +98,7 @@ x <- as.matrix(SingleCellExperiment::counts(data))
 classes <- SingleCellExperiment::colData(data)[class_colname]
 classes <- classes[colnames(x),]
 start <- Sys.time()
+x <- x[rowSums(x) != 0, ]
 f1 <- psdR::complexity(x, classes)
 end <- Sys.time()
 print(paste('complexity score = ', f1))
@@ -105,3 +106,15 @@ print(paste('complexity execution time :', difftime(end, start, units = 'secs'))
 
 psdR::complexity(x)
 psdR::complexity(x, c())
+
+###############################################
+
+
+data <- readRDS(file = 'TabulaMuris_Heart_10X.rds')
+class_colname <- "cell_type1"
+x <- as.matrix(SingleCellExperiment::counts(data))
+classes <- SingleCellExperiment::colData(data)[class_colname]
+classes <- classes[colnames(x),]
+
+complexity_df <- psdR::compare_methods(x, classes)
+

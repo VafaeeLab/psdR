@@ -4,13 +4,15 @@
 \alias{psd}
 \title{psd function}
 \usage{
-psd(data)
+psd(data, filter = TRUE)
 }
 \arguments{
-\item{data}{scRNA count data - cells Vs genes (dim : c x g)}
+\item{data}{scRNA count data - genes Vs cells (dim : g x c)}
+
+\item{filter}{logical value indicating if genes with 0 count should be filtered - default = TRUE}
 }
 \value{
-psd transformation of input data
+psd transformation of input data (dim : g x c)
 }
 \description{
 Compute the Power Spectral Density (psd) transformation of the given scRNA count data
