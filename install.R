@@ -8,5 +8,5 @@ BiocManager::install("SingleCellExperiment")
 BiocManager::install("Linnorm")
 
 install.packages("caTools")
-
+install.packages("Seurat")
 

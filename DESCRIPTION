@@ -18,4 +18,7 @@ Imports:
 	SingleCellExperiment, 
 	edgeR,
 	Linnorm,
-	caTools
+	caTools,
+	Rtsne,
+	ggplot2,
+	Seurat

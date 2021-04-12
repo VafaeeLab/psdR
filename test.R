@@ -1,8 +1,10 @@
 # devtools::create("~/UNSW/VafaeeLab/psdR")
 
 setwd("~/UNSW/VafaeeLab/psdR")
+Sys.setenv(keep.source.pkgs = TRUE)
 devtools::document()
 devtools::install()
+devtools::load_all()
 
 
 library(SingleCellExperiment)
@@ -116,5 +118,8 @@ x <- as.matrix(SingleCellExperiment::counts(data))
 classes <- SingleCellExperiment::colData(data)[class_colname]
 classes <- classes[colnames(x),]
 
-complexity_df <- psdR::compare_methods(x, classes)
+complexity_df <- psdR::compare_methods(x, classes,
+                                       c('CPM'))
+# complexity_df <- psdR::compare_methods(x, classes,
+#                                        c('CPM', 'NormCPM', 'TMM', 'Linnorm', 'Seurat'))
 
