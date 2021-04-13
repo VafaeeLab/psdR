@@ -31,6 +31,8 @@ The function definitions are present within the `R` directory in this repo.
 The file `test.R`, contains sample function calls. It also contains, as comments, the execution time comparisons of `psd` in R and through Python.
 These will be removed later.
 
+`tsne_plot.png` and `complexity_df.txt` contain sample results of `compare_methods`. Will be removed later. 
+
 
 ### Usage in future
 
