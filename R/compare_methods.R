@@ -62,7 +62,7 @@ preprocess_data <- function(data, method){
     pp_data <- Linnorm::Linnorm(data)
   }
   else if (method == 'Seurat') {
-    pp_data <- Seurat::NormalizeData(data)
+    pp_data <- as.matrix(Seurat::NormalizeData(data))
   }
   else {
     pp_data <- data
