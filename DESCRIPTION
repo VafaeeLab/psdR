@@ -1,6 +1,6 @@
 Package: psdR
 Title: provides the preprocessing method psd, and other helper functions
-Version: 0.0.2.0
+Version: 0.0.3.0
 Authors@R: 
     person(given = "Abhishek",
            family = "Vijayan",
@@ -14,6 +14,7 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+biocViews:
 Imports:
 	SingleCellExperiment, 
 	edgeR,
