@@ -25,7 +25,7 @@ Within R, to get man page for a function, say `complexity`
 ?complexity
 ```
 
-The function definitions are present within the R directory.
+The function definitions are present within the `R` directory in this repo.
 
 
 The file `test.R`, contains sample function calls. It also contains, as comments, the execution time comparisons of `psd` in R and through Python.
