@@ -127,7 +127,7 @@ create_plot <- function(df_list, methods, psd){
   if ('Colour' %in% colnames(df_list[[2]])) {
     tsne_plot <- ggplot2::ggplot(df_list[[2]]) +
       ggplot2::geom_point(ggplot2::aes(x = x, y = y, colour = Colour)) +
-      ggplot2::facet_wrap(ggplot2::vars(Method), nrow = 3, ncol = 2) +
+      ggplot2::facet_wrap(ggplot2::vars(Method), nrow = nrow, ncol = ncol) +
       ggplot2::labs(colour = "Cell Types", title = "tSNE embeddings") +
       ggplot2::xlab("Dimension 1") +
       ggplot2::ylab("Dimension 2")
