@@ -101,13 +101,13 @@ classes <- SingleCellExperiment::colData(data)[class_colname]
 classes <- classes[colnames(x),]
 start <- Sys.time()
 x <- x[rowSums(x) != 0, ]
-f1 <- psdR::complexity(x, classes)
+f1 <- complexity(x, classes)
 end <- Sys.time()
 print(paste('complexity score = ', f1))
 print(paste('complexity execution time :', difftime(end, start, units = 'secs')))
 
-psdR::complexity(x)
-psdR::complexity(x, c())
+complexity(x)
+complexity(x, c())
 
 ###############################################
 
@@ -118,8 +118,9 @@ x <- as.matrix(SingleCellExperiment::counts(data))
 classes <- SingleCellExperiment::colData(data)[class_colname]
 classes <- classes[colnames(x),]
 
-complexity_df <- psdR::compare_methods(x, classes,
-                                       c('CPM'))
-# complexity_df <- psdR::compare_methods(x, classes,
-#                                        c('CPM', 'NormCPM', 'TMM', 'Linnorm', 'Seurat'))
-
+complexity_df <- compare_methods(x, classes,
+                                       c('CPM', 'NormCPM', 'TMM', 'Linnorm', 'Seurat'))
+complexity_df <- compare_methods(x, classes,
+                                       c('Seurat'))
+complexity_df <- compare_methods(x, classes,
+                                 c('CPM'))
