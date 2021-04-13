@@ -8,8 +8,7 @@
 #' @return complexity score : higher score indicates lower complexity
 #' @export
 complexity <- function(data, classes = NA){
-  if ( ( (length(classes) == 1) && is.na(classes) ) ||
-          length(classes) == 0 ){
+  if (is_empty(classes)) {
     return (NA)
   }
 

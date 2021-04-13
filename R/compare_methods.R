@@ -13,7 +13,7 @@
 #' @export
 compare_methods <- function(data, classes = NA, methods = c('CPM', 'Linnorm'),
                        psd = TRUE, show_plots = TRUE) {
-  if (!(length(classes) <= 1 && is.na(classes)) && anyNA(classes)) {
+  if (!is_empty(classes) && anyNA(classes)) {
     data <- data[, !is.na(classes)]
     classes <- classes[!is.na(classes)]
   }
@@ -73,7 +73,7 @@ preprocess_data <- function(data, method){
 
 init_df_list <- function(classes){
   complexity_df <- data.frame(Method = character(), Complexity = double(), TimeTaken = double())
-  if (length(classes) <= 1 && is.na(classes)) {
+  if (is_empty(classes)) {
     tsne_result_df <- data.frame(Method = character(), x = double(), y = double())
   }
   else {
@@ -107,7 +107,7 @@ update_df_list <- function(df_list, pp_data, classes, method,
   if (show_plots) {
     set.seed(random_seed)
     tsne_result <- Rtsne::Rtsne(t(pp_data))
-    if (length(classes) <= 1 && is.na(classes)) {
+    if (is_empty(classes)) {
       tsne_result_row <- data.frame(Method = method, x = tsne_result$Y[,1],
                                     y = tsne_result$Y[,2])
     }
@@ -126,8 +126,8 @@ create_plot <- function(df_list, methods, psd){
   ncol <- if (psd) 2 else 1
   if ('Colour' %in% colnames(df_list[[2]])) {
     tsne_plot <- ggplot2::ggplot(df_list[[2]]) +
-      ggplot2::geom_point(aes(x = x, y = y, colour = Colour)) +
-      ggplot2::facet_wrap(vars(Method), nrow = 3, ncol = 2) +
+      ggplot2::geom_point(ggplot2::aes(x = x, y = y, colour = Colour)) +
+      ggplot2::facet_wrap(ggplot2::vars(Method), nrow = 3, ncol = 2) +
       ggplot2::labs(colour = "Cell Types", title = "tSNE embeddings") +
       ggplot2::xlab("Dimension 1") +
       ggplot2::ylab("Dimension 2")
@@ -135,11 +135,16 @@ create_plot <- function(df_list, methods, psd){
   else{
     tsne_plot <- ggplot2::ggplot(df_list[[2]]) +
       ggplot2::geom_point(aes(x = x, y = y)) +
-      ggplot2::facet_wrap(vars(Method), nrow = nrow, ncol = ncol) +
+      ggplot2::facet_wrap(ggplot2::vars(Method), nrow = nrow, ncol = ncol) +
       ggplot2::labs(title = "tSNE embeddings") +
       ggplot2::xlab("Dimension 1") +
       ggplot2::ylab("Dimension 2")
   }
-  tsne_plot
+  print(tsne_plot)
+  ggplot2::ggsave("tsne_plot.png", tsne_plot)
 }
 
+
+is_empty <- function(info) {
+  return (length(info) == 0 || (length(info) == 1 && is.na(info)))
+}
