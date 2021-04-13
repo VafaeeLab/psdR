@@ -20,15 +20,16 @@ library(psdR)
 * complexity
 * compare_methods
 
-Within R, to get man page for a function,
+Within R, to get man page for a function, say `complexity`
 ```
-?psd
+?complexity
 ```
 
 The function definitions are present within the R directory.
 
 
-The file `test.R`, contains sample function calls
+The file `test.R`, contains sample function calls. It also contains, as comments, the execution time comparisons of `psd` in R and through Python.
+These will be removed later.
 
 
 ### Usage in future
