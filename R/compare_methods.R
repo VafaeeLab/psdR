@@ -94,10 +94,10 @@ update_df_list <- function(df_list, pp_data, classes, method,
                   #genes with 0 count are already filtered out
                   #       in the body of 'compareMethods' function
                   #       So passing filter=FALSE here
-    method <- paste(method, " with psd", sep = "-")
+    method <- paste(method, "with psd", sep = " - ")
   }
   else {
-    method <- paste(method, " no psd", sep = "-")
+    method <- paste(method, "no psd", sep = " - ")
   }
   complexity <- psdR::complexity(pp_data, classes)
   end <- Sys.time()
