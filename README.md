@@ -12,16 +12,23 @@ cd psdR
 In R,
 ```
 devtools::install()
+library(psdR)
 ```
-
-The file test.R, contains sample function calls
 
 3 functions made available through this package :
 * psd
 * complexity
 * compare_methods
 
-These function definitions are present within the R directory.
+Within R, to get man page for a function,
+```
+?psd
+```
+
+The function definitions are present within the R directory.
+
+
+The file `test.R`, contains sample function calls
 
 
 ### Usage in future
