@@ -118,9 +118,11 @@ x <- as.matrix(SingleCellExperiment::counts(data))
 classes <- SingleCellExperiment::colData(data)[class_colname]
 classes <- classes[colnames(x),]
 
-complexity_df <- compare_methods(x, classes,
+complexity_df_1 <- compare_methods(x, classes,
                                        c('CPM', 'NormCPM', 'TMM', 'Linnorm', 'Seurat'))
-complexity_df <- compare_methods(x, classes,
+complexity_df_2 <- compare_methods(x, classes,
                                        c('Seurat'))
-complexity_df <- compare_methods(x, classes,
+complexity_df_3 <- compare_methods(x, classes,
                                  c('CPM'))
+complexity_df_4 <- compare_methods(data = x, classes = classes, plot_file_name = "cpm_tsne.png")
+complexity_df_5 <- compare_methods(data = x, classes = NA, plot_file_name = "noclass_cpm_tsne.png")

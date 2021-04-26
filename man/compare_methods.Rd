@@ -9,7 +9,8 @@ compare_methods(
   classes = NA,
   methods = c("CPM", "Linnorm"),
   psd = TRUE,
-  show_plots = TRUE
+  show_plots = TRUE,
+  plot_file_name = NA
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ compare_methods(
 \item{psd}{should psd be applied while comparing methods}
 
 \item{show_plots}{should plots be shown}
+
+\item{plot_file_name}{name of the file to save the plot}
 }
 \value{
 comparison of complexity scores

@@ -9,10 +9,11 @@
 #' @param methods list of preprocessing methods to be compared
 #' @param psd should psd be applied while comparing methods
 #' @param show_plots  should plots be shown
+#' @param plot_file_name name of the file to save the plot
 #' @return comparison of complexity scores
 #' @export
 compare_methods <- function(data, classes = NA, methods = c('CPM', 'Linnorm'),
-                       psd = TRUE, show_plots = TRUE) {
+                       psd = TRUE, show_plots = TRUE, plot_file_name = NA) {
   if (!is_empty(classes) && anyNA(classes)) {
     data <- data[, !is.na(classes)]
     classes <- classes[!is.na(classes)]
@@ -39,7 +40,7 @@ compare_methods <- function(data, classes = NA, methods = c('CPM', 'Linnorm'),
     print(paste("Completed", method))
   }
   if (show_plots) {
-    create_plot(df_list, methods, psd)
+    create_plot(df_list, methods, psd, plot_file_name)
   }
   return (df_list[[1]])
 }
@@ -121,7 +122,7 @@ update_df_list <- function(df_list, pp_data, classes, method,
 }
 
 
-create_plot <- function(df_list, methods, psd){
+create_plot <- function(df_list, methods, psd, plot_file_name){
   nrow <- length(methods)
   ncol <- if (psd) 2 else 1
   if ('Colour' %in% colnames(df_list[[2]])) {
@@ -134,14 +135,17 @@ create_plot <- function(df_list, methods, psd){
   }
   else{
     tsne_plot <- ggplot2::ggplot(df_list[[2]]) +
-      ggplot2::geom_point(aes(x = x, y = y)) +
+      ggplot2::geom_point(ggplot2::aes(x = x, y = y)) +
       ggplot2::facet_wrap(ggplot2::vars(Method), nrow = nrow, ncol = ncol) +
       ggplot2::labs(title = "tSNE embeddings") +
       ggplot2::xlab("Dimension 1") +
       ggplot2::ylab("Dimension 2")
   }
   print(tsne_plot)
-  ggplot2::ggsave("tsne_plot.png", tsne_plot)
+  if (is.na(plot_file_name)){
+    plot_file_name <- "tsne_plot.png"
+  }
+  ggplot2::ggsave(plot_file_name, tsne_plot)
 }
 
 
