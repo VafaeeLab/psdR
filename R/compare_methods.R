@@ -6,7 +6,7 @@
 #'
 #' @param data scRNA count data - genes Vs cells (dim : g x c)
 #' @param classes cell annotation i.e. the class of each of the cells in data
-#' @param methods list of preprocessing methods to be compared
+#' @param methods vector of preprocessing methods to be compared - default : c('CPM', 'Linnorm')
 #' @param psd should psd be applied while comparing methods
 #' @param show_plots  should plots be shown
 #' @param plot_file_name name of the file to save the plot

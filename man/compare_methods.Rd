@@ -18,7 +18,7 @@ compare_methods(
 
 \item{classes}{cell annotation i.e. the class of each of the cells in data}
 
-\item{methods}{list of preprocessing methods to be compared}
+\item{methods}{vector of preprocessing methods to be compared - default : c('CPM', 'Linnorm')}
 
 \item{psd}{should psd be applied while comparing methods}
 
