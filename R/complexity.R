@@ -1,6 +1,6 @@
 #' complexity function
 #'
-#' Returns a complexity score of the data, based on Fischer's Discriminant Ratio
+#' Returns a complexity score of the data, based on Fischer's Discriminant Ratio.
 #' Higher score indicates lower complexity
 #'
 #' @param data scRNA count data - genes Vs cells (dim : g x c)

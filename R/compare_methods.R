@@ -5,12 +5,12 @@
 #' Also plots the datasets in all above cases after applying tSNE
 #'
 #' @param data scRNA count data - genes Vs cells (dim : g x c)
-#' @param classes cell annotation i.e. the class of each of the cells in data
-#' @param methods vector of preprocessing methods to be compared - default : c('CPM', 'Linnorm')
-#' @param psd should psd be applied while comparing methods
-#' @param show_plots  should plots be shown
-#' @param plot_file_name name of the file to save the plot
-#' @return comparison of complexity scores
+#' @param classes cell annotation i.e. the class of each of the cells in the data
+#' @param methods vector of preprocessing methods to be compared
+#' @param psd logical value to indicate if psd should be applied while comparing methods
+#' @param show_plots  logical value to indicate if plots should be shown
+#' @param plot_file_name name of the file to save the plot : defaults to "tsne_plot.png"
+#' @return dataframe containing comparison of complexity scores
 #' @export
 compare_methods <- function(data, classes = NA, methods = c('CPM', 'Linnorm'),
                        psd = TRUE, show_plots = TRUE, plot_file_name = NA) {

@@ -15,6 +15,6 @@ complexity(data, classes = NA)
 complexity score : higher score indicates lower complexity
 }
 \description{
-Returns a complexity score of the data, based on Fischer's Discriminant Ratio
+Returns a complexity score of the data, based on Fischer's Discriminant Ratio.
 Higher score indicates lower complexity
 }

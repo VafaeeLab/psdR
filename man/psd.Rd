@@ -9,7 +9,7 @@ psd(data, filter = TRUE)
 \arguments{
 \item{data}{scRNA count data - genes Vs cells (dim : g x c)}
 
-\item{filter}{logical value indicating if genes with 0 count should be filtered - default = TRUE}
+\item{filter}{logical value indicating if genes with 0 count should be filtered}
 }
 \value{
 psd transformation of input data (dim : g x c)

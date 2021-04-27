@@ -16,18 +16,18 @@ compare_methods(
 \arguments{
 \item{data}{scRNA count data - genes Vs cells (dim : g x c)}
 
-\item{classes}{cell annotation i.e. the class of each of the cells in data}
+\item{classes}{cell annotation i.e. the class of each of the cells in the data}
 
-\item{methods}{vector of preprocessing methods to be compared - default : c('CPM', 'Linnorm')}
+\item{methods}{vector of preprocessing methods to be compared}
 
-\item{psd}{should psd be applied while comparing methods}
+\item{psd}{logical value to indicate if psd should be applied while comparing methods}
 
-\item{show_plots}{should plots be shown}
+\item{show_plots}{logical value to indicate if plots should be shown}
 
-\item{plot_file_name}{name of the file to save the plot}
+\item{plot_file_name}{name of the file to save the plot : defaults to "tsne_plot.png"}
 }
 \value{
-comparison of complexity scores
+dataframe containing comparison of complexity scores
 }
 \description{
 Returns a comparison of complexity scores of the data before and after
