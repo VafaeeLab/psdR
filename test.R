@@ -126,3 +126,14 @@ complexity_df_3 <- compare_methods(x, classes,
                                  c('CPM'))
 complexity_df_4 <- compare_methods(data = x, classes = classes, plot_file_name = "cpm_tsne.png")
 complexity_df_5 <- compare_methods(data = x, classes = NA, plot_file_name = "noclass_cpm_tsne.png")
+
+complexity_df_6 <- compare_methods(data = x, methods = c(), classes = classes, plot_file_name = "none_tsne.png")
+complexity_df_7 <- compare_methods(data = x, methods = c(), classes = NA, plot_file_name = "noclass_none_tsne.png")
+
+complexity_df_8 <- compare_methods(data = x, methods = c(), psd = FALSE, classes = classes, plot_file_name = "none_nopsd_tsne.png")
+complexity_df_9 <- compare_methods(data = x, methods = c(), psd = FALSE, classes = NA, plot_file_name = "noclass_none_nopsd_tsne.png")
+
+x <- x[, !is.na(classes)]
+classes <- classes[!is.na(classes)]
+complexity_df_10 <- compare_methods(data = x, methods = c(), psd = FALSE, classes = classes, plot_file_name = "colour_tobesame.png")
+complexity_df_11 <- compare_methods(data = x, methods = c(), psd = FALSE, classes = NA, plot_file_name = "nocolour_tobesame.png")
