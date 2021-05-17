@@ -13,7 +13,10 @@
 #' @return dataframe containing comparison of complexity scores
 #' @export
 compare_methods <- function(data, classes = NA, methods = c('CPM', 'Linnorm'),
-                       psd = TRUE, show_plots = TRUE, plot_file_name = NA) {
+                       psd = TRUE, show_plots = TRUE,
+                       perplexity = 30, plot_file_name = NA,
+                       plot_colour_label = "Cell Types",
+                       plot_title = "tSNE embeddings") {
   if (!is_empty(classes) && anyNA(classes)) {
     data <- data[, !is.na(classes)]
     classes <- classes[!is.na(classes)]
@@ -32,15 +35,16 @@ compare_methods <- function(data, classes = NA, methods = c('CPM', 'Linnorm'),
       next
     }
     df_list <- update_df_list(df_list, pp_data, classes, method,
-                                          FALSE, show_plots)
+                                          FALSE, show_plots, perplexity)
     if (psd) {
       df_list <- update_df_list(df_list, pp_data, classes, method,
-                                TRUE, show_plots)
+                                TRUE, show_plots, perplexity)
     }
     print(paste("Completed", method))
   }
   if (show_plots) {
-    create_plot(df_list, methods, psd, plot_file_name)
+    create_plot(df_list, methods, psd, plot_file_name, plot_colour_label,
+                plot_title)
   }
   return (df_list[[1]])
 }
@@ -86,7 +90,8 @@ init_df_list <- function(classes){
 
 
 update_df_list <- function(df_list, pp_data, classes, method,
-                                 is_psd, show_plots = TRUE, random_seed = 1){
+                                 is_psd, show_plots = TRUE,
+                                perplexity, random_seed = 1){
   complexity_df <- df_list[[1]]
   tsne_result_df <- df_list[[2]]
   start <- Sys.time()
@@ -107,7 +112,7 @@ update_df_list <- function(df_list, pp_data, classes, method,
                                     TimeTaken = difftime(end, start, units = 'secs')))
   if (show_plots) {
     set.seed(random_seed)
-    tsne_result <- Rtsne::Rtsne(t(pp_data))
+    tsne_result <- Rtsne::Rtsne(t(pp_data), perplexity = perplexity)
     if (is_empty(classes)) {
       tsne_result_row <- data.frame(Method = method, x = tsne_result$Y[,1],
                                     y = tsne_result$Y[,2])
@@ -122,14 +127,16 @@ update_df_list <- function(df_list, pp_data, classes, method,
 }
 
 
-create_plot <- function(df_list, methods, psd, plot_file_name){
+create_plot <- function(df_list, methods, psd, plot_file_name,
+                        plot_colour_label,
+                        plot_title){
   nrow <- length(methods)
   ncol <- if (psd) 2 else 1
   if ('Colour' %in% colnames(df_list[[2]])) {
     tsne_plot <- ggplot2::ggplot(df_list[[2]]) +
       ggplot2::geom_point(ggplot2::aes(x = x, y = y, colour = Colour)) +
       ggplot2::facet_wrap(ggplot2::vars(Method), nrow = nrow, ncol = ncol) +
-      ggplot2::labs(colour = "Cell Types", title = "tSNE embeddings") +
+      ggplot2::labs(colour = plot_colour_label, title = plot_title) +
       ggplot2::xlab("Dimension 1") +
       ggplot2::ylab("Dimension 2")
   }
@@ -137,7 +144,7 @@ create_plot <- function(df_list, methods, psd, plot_file_name){
     tsne_plot <- ggplot2::ggplot(df_list[[2]]) +
       ggplot2::geom_point(ggplot2::aes(x = x, y = y)) +
       ggplot2::facet_wrap(ggplot2::vars(Method), nrow = nrow, ncol = ncol) +
-      ggplot2::labs(title = "tSNE embeddings") +
+      ggplot2::labs(title = plot_title) +
       ggplot2::xlab("Dimension 1") +
       ggplot2::ylab("Dimension 2")
   }

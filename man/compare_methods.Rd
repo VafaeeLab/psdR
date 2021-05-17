@@ -10,7 +10,10 @@ compare_methods(
   methods = c("CPM", "Linnorm"),
   psd = TRUE,
   show_plots = TRUE,
-  plot_file_name = NA
+  perplexity = 30,
+  plot_file_name = NA,
+  plot_colour_label = "Cell Types",
+  plot_title = "tSNE embeddings"
 )
 }
 \arguments{
