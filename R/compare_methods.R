@@ -8,13 +8,16 @@
 #' @param classes cell annotation i.e. the class of each of the cells in the data
 #' @param methods vector of preprocessing methods to be compared
 #' @param psd logical value to indicate if psd should be applied while comparing methods
-#' @param show_plots  logical value to indicate if plots should be shown
+#' @param show_plots logical value to indicate if plots should be shown
+#' @param perplexity perplexity value while computing tSNE
 #' @param plot_file_name name of the file to save the plot : defaults to "tsne_plot.png"
+#' @param plot_colour_label title of the plot legend
+#' @param plot_title title of the plot
 #' @return dataframe containing comparison of complexity scores
 #' @export
 compare_methods <- function(data, classes = NA, methods = c('CPM', 'Linnorm'),
                        psd = TRUE, show_plots = TRUE,
-                       perplexity = 30, plot_file_name = NA,
+                       perplexity = 30, plot_file_name = "tsne_plot.png",
                        plot_colour_label = "Cell Types",
                        plot_title = "tSNE embeddings") {
   if (!is_empty(classes) && anyNA(classes)) {
@@ -147,10 +150,6 @@ create_plot <- function(df_list, methods, psd, plot_file_name,
       ggplot2::labs(title = plot_title) +
       ggplot2::xlab("Dimension 1") +
       ggplot2::ylab("Dimension 2")
-  }
-  print(tsne_plot)
-  if (is.na(plot_file_name)){
-    plot_file_name <- "tsne_plot.png"
   }
   ggplot2::ggsave(plot_file_name, tsne_plot)
 }

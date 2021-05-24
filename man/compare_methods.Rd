@@ -11,7 +11,7 @@ compare_methods(
   psd = TRUE,
   show_plots = TRUE,
   perplexity = 30,
-  plot_file_name = NA,
+  plot_file_name = "tsne_plot.png",
   plot_colour_label = "Cell Types",
   plot_title = "tSNE embeddings"
 )
@@ -27,7 +27,13 @@ compare_methods(
 
 \item{show_plots}{logical value to indicate if plots should be shown}
 
+\item{perplexity}{perplexity value while computing tSNE}
+
 \item{plot_file_name}{name of the file to save the plot : defaults to "tsne_plot.png"}
+
+\item{plot_colour_label}{title of the plot legend}
+
+\item{plot_title}{title of the plot}
 }
 \value{
 dataframe containing comparison of complexity scores
