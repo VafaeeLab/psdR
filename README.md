@@ -3,15 +3,12 @@ Power Spectral Density (psd) preprocessing method in R
 
 ### Usage
 
-For now, the repo is private - to use the code
 ```
-git clone git@github.com:abhivij/psdR.git
-cd psdR
+devtools::install_github("abhivij/psdR")
 ```
 
 In R,
 ```
-devtools::install()
 library(psdR)
 ```
 
@@ -33,10 +30,3 @@ These will be removed later.
 
 `tsne_plot.png` and `complexity_df.txt` contain sample results of `compare_methods`. Will be removed later. 
 
-
-### Usage in future
-
-Once the repo is made public, the package can be installed by
-```
-devtools::install_github("abhivij/psdR")
-```
