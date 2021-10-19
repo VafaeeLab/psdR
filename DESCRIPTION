@@ -1,15 +1,14 @@
 Package: psdR
 Title: provides the preprocessing method psd, and other helper functions
-Version: 0.0.3.0
+Version: 0.1.0.0
 Authors@R: 
     person(given = "Abhishek",
            family = "Vijayan",
            role = c("aut", "cre"),
            email = "abhishek.kcvijayan@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+Description: The pre-processing method PSD, inspired by power spectral density analysis is made available through this package.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
