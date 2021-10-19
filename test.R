@@ -13,6 +13,8 @@ library(reticulate)
 source_python('psd.py')
 
 
+#ran the below line to create mit license
+# usethis::use_mit_license()
 
 
 compare_psd_implementation <- function(data, show_result = FALSE){
