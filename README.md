@@ -1,6 +1,11 @@
 # psdR
 Power Spectral Density (psd) preprocessing method in R
 
+
+### Citation
+If you use this repository, please cite our publication in *Nucleic Acids Research* : [Disentangling single-cell omics representation with a power spectral density-based feature extraction](https://doi.org/10.1093/nar/gkac436)
+
+
 ### Usage
 
 ```
